@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whimsical Folly</title>
+  <style>
+    body { font-family: 'Georgia', serif; margin: 0; padding: 0; background: #fef9f4; color: #333; }
+    header { background: #f5e1da; padding: 2rem; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5rem; }
+    .hero { background: #ffeedd; padding: 4rem 2rem; text-align: center; }
+    .section { padding: 2rem; max-width: 1200px; margin: auto; }
+    .gallery img { max-width: 100%; border-radius: 12px; margin: 0.5rem; }
+    .cards { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .card { background: #fff0e6; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); width: 250px; text-align: center; }
+    .card img { max-width: 100%; border-radius: 8px; }
+    footer { background: #f5e1da; padding: 2rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Whimsical Folly</h1>
+    <p>A cozy bakery & tea house, bringing stories and sweetness to life.</p>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to Our World</h2>
+    <p>Step inside for artisanal treats, warm tea, and a sprinkle of whimsy.</p>
+  </section>
+
+  <section class="section" id="menu">
+    <h2>Our Menu</h2>
+    <div class="cards" id="menu-cards"></div>
+  </section>
+
+  <section class="section" id="specials">
+    <h2>Specials & Seasonal Treats</h2>
+    <div class="cards" id="specials-cards"></div>
+  </section>
+
+  <section class="section" id="events">
+    <h2>Upcoming Events</h2>
+    <div class="cards" id="events-cards"></div>
+  </section>
+
+  <section class="section" id="story">
+    <h2>Our Story</h2>
+    <p id="story-content">Loading...</p>
+  </section>
+
+  <section class="section gallery" id="gallery">
+    <h2>Gallery</h2>
+    <div id="gallery-images"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Whimsical Folly. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/contentful@9.1.13/dist/contentful.browser.min.js"></script>
+  <script>
+    const client = contentful.createClient({
+      space: 'YOUR_SPACE_ID',        // replace with your Contentful space ID
+      accessToken: 'YOUR_ACCESS_TOKEN' // replace with your Contentful delivery API access token
+    });
+
+    // Fetch Menu Items
+    client.getEntries({ content_type: 'menuItem' })
+      .then(response => {
+        const container = document.getElementById('menu-cards');
+        response.items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${item.fields.image.fields.file.url}" alt="${item.fields.name}">
+            <h3>${item.fields.name}</h3>
+            <p>${item.fields.description}</p>
+            <p><strong>$${item.fields.price}</strong></p>
+          `;
+          container.appendChild(card);
+        });
+      });
+
+    // Fetch Specials
+    client.getEntries({ content_type: 'special' })
+      .then(response => {
+        const container = document.getElementById('specials-cards');
+        response.items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${item.fields.image.fields.file.url}" alt="${item.fields.title}">
+            <h3>${item.fields.title}</h3>
+            <p>${item.fields.description}</p>
+          `;
+          container.appendChild(card);
+        });
+      });
+
+    // Fetch Events
+    client.getEntries({ content_type: 'event' })
+      .then(response => {
+        const container = document.getElementById('events-cards');
+        response.items.forEach(event => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h3>${event.fields.title}</h3>
+            <p>${event.fields.date}</p>
+            <p>${event.fields.description}</p>
+          `;
+          container.appendChild(card);
+        });
+      });
+
+    // Fetch Story Section
+    client.getEntries({ content_type: 'story' })
+      .then(response => {
+        const story = response.items[0]?.fields.content || "Our story will be here soon!";
+        document.getElementById('story-content').textContent = story;
+      });
+
+    // Fetch Gallery Images
+    client.getEntries({ content_type: 'galleryImage' })
+      .then(response => {
+        const gallery = document.getElementById('gallery-images');
+        response.items.forEach(img => {
+          const imageEl = document.createElement('img');
+          imageEl.src = img.fields.image.fields.file.url;
+          imageEl.alt = img.fields.title || "Gallery Image";
+          gallery.appendChild(imageEl);
+        });
+      });
+
+  </script>
+</body>
+</html>
