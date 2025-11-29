@@ -1,0 +1,32 @@
+:root{
+  --bg:#fffaf4;
+  --accent:#b5651d;
+  --muted:#6b5b4a;
+  --card:#fff;
+}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.4;background:var(--bg);color:var(--muted);margin:0}
+.container{max-width:900px;margin:0 auto;padding:1rem}
+.site-header{background:linear-gradient(90deg,rgba(181,101,29,0.05),transparent);border-bottom:1px solid rgba(0,0,0,0.05)}
+.site-header .container{display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:'Georgia',serif;margin:0;color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;margin-left:1rem}
+.hero{padding:4rem 0;text-align:center}
+.hero h2{font-size:2rem;margin:0 0 .5rem;color:var(--accent)}
+.hero p{margin:0 0 1rem}
+button{background:var(--accent);color:white;border:0;padding:.6rem 1rem;border-radius:6px;cursor:pointer}
+.menu .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;list-style:none;padding:0;margin:1rem 0}
+.card{background:var(--card);padding:1rem;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.card strong{display:block;margin-bottom:.4rem;color:var(--accent)}
+.about,.contact{padding:1rem 0}
+.site-footer{padding:1rem 0;border-top:1px solid rgba(0,0,0,0.04);text-align:center;font-size:.9rem}
+@media(min-width:700px){.hero h2{font-size:2.4rem}}
+
+/* Editing UI */
+.edit-controls{display:flex;gap:.5rem;align-items:center}
+.btn{background:transparent;border:1px solid rgba(0,0,0,0.08);padding:.35rem .6rem;border-radius:6px;color:var(--muted);cursor:pointer}
+.btn:hover{border-color:rgba(0,0,0,0.12)}
+.hidden{display:none}
+.editable{outline:2px dashed rgba(181,101,29,0.35);padding:.15rem;border-radius:4px}
+body.editing .card{box-shadow:0 0 0 3px rgba(181,101,29,0.03)}
+

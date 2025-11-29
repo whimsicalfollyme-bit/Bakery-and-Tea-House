@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Whimsical Folly Bakery and Tea House</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="brand">Whimsical Folly Bakery and Tea House</h1>
+        <nav>
+          <a href="#menu">Menu</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Edit controls (toggle enables inline editing) -->
+        <div class="edit-controls" aria-hidden="false">
+          <button id="editToggle" class="btn">Edit</button>
+          <button id="saveBtn" class="btn hidden">Save</button>
+          <button id="exportBtn" class="btn hidden">Export HTML</button>
+          <button id="resetBtn" class="btn hidden">Reset</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h2 data-editable="hero-title">Fresh pastries, warm tea, cozy vibes</h2>
+          <p data-editable="hero-sub">Hand-baked daily — made with care in our little kitchen.</p>
+          <button id="orderBtn">View Menu</button>
+        </div>
+      </section>
+
+      <section id="menu" class="container menu">
+        <h3 data-editable="menu-heading">Featured</h3>
+        <ul class="cards" data-editable="menu-list">
+          <li class="card" data-editable="menu-1"><strong>Croissant</strong><span>Buttery & flaky</span></li>
+          <li class="card" data-editable="menu-2"><strong>Matcha Cake</strong><span>Light, earthy matcha</span></li>
+          <li class="card" data-editable="menu-3"><strong>Chamomile Tea</strong><span>Calming & fragrant</span></li>
+        </ul>
+      </section>
+
+      <section id="about" class="container about">
+        <h3 data-editable="about-heading">About Us</h3>
+        <p data-editable="about-text">We are a small bakery and tea shop focused on seasonal ingredients and slow hospitality.</p>
+      </section>
+
+      <section id="contact" class="container contact">
+        <h3 data-editable="contact-heading">Contact</h3>
+        <address data-editable="contact-address">
+          123 Pastry Lane<br />
+          Tea Town, TT 00000<br />
+          <a href="mailto:hello@example.com" data-editable="contact-email">hello@example.com</a>
+        </address>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© Whimsical Folly Bakery and Tea House</div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
